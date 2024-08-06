@@ -51,6 +51,8 @@ class BaseLLM(ABC, LLM[TIn, TOut], Generic[TIn, TOut]):
     async def _invoke(self, input: TIn, **kwargs: Unpack[LLMInput]) -> LLMOutput[TOut]:
         try:
             output = await self._execute_llm(input, **kwargs)
+            open("output.txt","a").write(str(input)+" \n"+str(output))
+            print(str(input)+" \n"+str(output))
             return LLMOutput(output=output)
         except Exception as e:
             stack_trace = traceback.format_exc()

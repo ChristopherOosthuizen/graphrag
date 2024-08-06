@@ -40,6 +40,4 @@ class OpenAICompletionLLM(BaseLLM[CompletionInput, CompletionOutput]):
             kwargs.get("model_parameters"), self.configuration
         )
         completion = self.client.completions.create(prompt=input, **args)
-        open("output.txt","a").write(str(input)+" \n"+str(completion.choices[0].text))
-        print(str(input)+" \n"+str(completion.choices[0].text))
         return completion.choices[0].text
