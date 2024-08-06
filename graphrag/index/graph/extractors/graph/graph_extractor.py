@@ -155,8 +155,8 @@ class GraphExtractor:
                 self._input_text_key: text,
             },
         )
+
         results = response.output or ""
-        print(results)
         # Repeat to ensure we maximize entity count
         for i in range(self._max_gleanings):
             response = await self._llm(
@@ -178,7 +178,8 @@ class GraphExtractor:
             )
             if response.output != "YES":
                 break
-
+        open("output.txt","a").write("<START>\n"+self._extraction_prompt+"\n<OUTPUT>\n"+str(results)+"\n<END>\n\n")
+        print(str(input)+" \n"+str(results))
         return results
 
     async def _process_results(
