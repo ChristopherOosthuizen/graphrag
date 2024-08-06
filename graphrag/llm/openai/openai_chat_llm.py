@@ -14,7 +14,7 @@ from graphrag.llm.types import (
     LLMInput,
     LLMOutput,
 )
-
+import ollama
 from ._prompts import JSON_CHECK_PROMPT
 from .openai_configuration import OpenAIConfiguration
 from .types import OpenAIClientTypes
@@ -50,10 +50,10 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
             *history,
             {"role": "user", "content": input},
         ]
-        completion = await self.client.chat.completions.create(
+        completion = await ollama.chat(model='llama3.1',
             messages=messages, **args
         )
-        return completion.choices[0].message.content
+        return completion['message']['content']
 
     async def _invoke_json(
         self,

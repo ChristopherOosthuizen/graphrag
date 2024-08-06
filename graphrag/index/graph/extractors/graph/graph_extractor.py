@@ -179,7 +179,7 @@ class GraphExtractor:
             if response.output != "YES":
                 break
         open("output.txt","a").write("<START>\n"+self._extraction_prompt+"\n<OUTPUT>\n"+str(results)+"\n<END>\n\n")
-        print(str(input)+" \n"+str(results))
+        print(str(input)+" \n"+str(results.output))
         return results
 
     async def _process_results(
