@@ -156,7 +156,7 @@ class GraphExtractor:
             },
         )
         results = response.output or ""
-
+        print(results)
         # Repeat to ensure we maximize entity count
         for i in range(self._max_gleanings):
             response = await self._llm(
