@@ -53,7 +53,8 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
         completion = await self.client.chat.completions.create(
             messages=messages, **args
         )
-        open("output.txt","a").write(str(CompletionInput)+" \n"+str(completion.choices[0].text))
+        open("output.txt","a").write(str(input)+" \n"+str(completion.choices[0].text))
+        print(str(input)+" \n"+str(completion.choices[0].text))
         return completion.choices[0].message.content
 
     async def _invoke_json(
