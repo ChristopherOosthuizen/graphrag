@@ -22,7 +22,7 @@ from .utils import (
     get_completion_llm_args,
     try_parse_json_object,
 )
-
+import os
 log = logging.getLogger(__name__)
 
 _MAX_GENERATION_RETRIES = 3
@@ -50,7 +50,12 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
             *history,
             {"role": "user", "content": input},
         ]
-        completion = ollama.chat(model='llama3.1',
+        if os.environ.get("MODEL") == "openai":
+            completion = await self.client.chat.completions.create(
+            messages=messages, **args
+            )
+            return completion.choices[0].message.content
+        completion = ollama.chat(model=os.environ["MODEL"],
             messages=messages
         )
         return completion['message']['content']
