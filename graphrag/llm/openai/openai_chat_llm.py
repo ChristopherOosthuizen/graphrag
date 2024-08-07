@@ -50,8 +50,7 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
             *history,
             {"role": "user", "content": input},
         ]
-        args['model'] = 'llama3.1:405b'
-        completion = ollama.chat(model='llama3.1:405b',
+        completion = ollama.chat(model='llama3.1',
             messages=messages
         )
         return completion['message']['content']
