@@ -18,7 +18,9 @@ from graphrag.llm.types import (
 
 TIn = TypeVar("TIn")
 TOut = TypeVar("TOut")
-
+import tiktoken
+enc = tiktoken.get_encoding("o200k_base")
+import os 
 
 class BaseLLM(ABC, LLM[TIn, TOut], Generic[TIn, TOut]):
     """LLM Implementation class definition."""
@@ -49,8 +51,10 @@ class BaseLLM(ABC, LLM[TIn, TOut], Generic[TIn, TOut]):
             output = await self._invoke_json(input, **kwargs)
         else:
             output = await self._invoke(input, **kwargs)
-        open("output.txt","a").write("<START>\n"+str(input)+"\n<OUTPUT>\n"+str(output)+"\n<END>\n\n")
-        print(str(input)+" \n"+str(output))
+        open(os.environ['output_dir'],"a").write("<START>\n"+str(input)+"\n<OUTPUT>\n"+str(output)+"\n<END>\n\n")
+        if not "token_count" in os.environ:
+            os.environ['token_count'] = "0"
+        os.environ['token_count'] = str(int(os.environ['token_count'])+len(enc.encode(input)))
         return output
 
     async def _invoke(self, input: TIn, **kwargs: Unpack[LLMInput]) -> LLMOutput[TOut]:

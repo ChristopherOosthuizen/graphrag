@@ -50,7 +50,7 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
             *history,
             {"role": "user", "content": input},
         ]
-        if os.environ.get("MODEL") == "openai":
+        if not "MODEL" in os.environ or os.environ["MODEL"] == "openai":
             completion = await self.client.chat.completions.create(
             messages=messages, **args
             )
