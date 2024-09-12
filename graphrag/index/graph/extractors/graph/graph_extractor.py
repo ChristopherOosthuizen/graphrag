@@ -178,7 +178,7 @@ class GraphExtractor:
             )
             if response.output != "YES":
                 break
-        log.critical(f"{self._extraction_prompt.format(input_text=text,**prompt_variables)}{results}")
+        log.critical(f"{self._extraction_prompt.format(input_text=text,**prompt_variables)}\n{results}")
         return results
 
     async def _process_results(

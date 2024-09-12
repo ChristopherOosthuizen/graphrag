@@ -203,7 +203,7 @@ class ClaimExtractor:
         result = self._parse_claim_tuples(results, prompt_args)
         for r in result:
             r["doc_id"] = f"{doc_index}"
-        log.critical(f"{self._extraction_prompt.format(**prompt_args)}{result}")
+        log.critical(f"{self._extraction_prompt.format(**prompt_args)}\n{result}")
         return result
 
     def _parse_claim_tuples(
