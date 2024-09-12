@@ -20,7 +20,7 @@ from graphrag.index.utils import clean_str
 from graphrag.llm import CompletionLLM
 
 from .prompts import CONTINUE_PROMPT, GRAPH_EXTRACTION_PROMPT, LOOP_PROMPT
-
+log = logging.getLogger(__name__)
 DEFAULT_TUPLE_DELIMITER = "<|>"
 DEFAULT_RECORD_DELIMITER = "##"
 DEFAULT_COMPLETION_DELIMITER = "<|COMPLETE|>"
