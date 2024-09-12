@@ -82,7 +82,7 @@ class CommunityReportsExtractor:
             output = {}
 
         text_output = self._get_text_output(output)
-        log.critical(f"{self._extraction_prompt}\n\ninputs:\n\n{inputs}\n\noutput:\n\n{text_output}")
+        log.critical(f"{self._extraction_prompt.format(**inputs)}{text_output}")
         return CommunityReportsResult(
             structured_output=output,
             output=text_output,
