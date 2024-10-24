@@ -13,7 +13,7 @@ from graphrag.llm.types import (
     CompletionOutput,
     LLMInput,
 )
-
+import numpy as np
 from .openai_configuration import OpenAIConfiguration
 from .types import OpenAIClientTypes
 from .utils import get_completion_llm_args

@@ -14,7 +14,7 @@ from graphrag.llm.types import (
     LLMInput,
     LLMOutput,
 )
-import pandas as pd 
+import numpy as np
 from ._prompts import JSON_CHECK_PROMPT
 from .openai_configuration import OpenAIConfiguration
 from .types import OpenAIClientTypes
