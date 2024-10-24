@@ -51,7 +51,7 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
             {"role": "user", "content": input},
         ]
         completion = await self.client.chat.completions.create(
-            messages=messages, **args, seed=np.random.randint(0, 10000, size=1)[0]
+            messages=messages, **args, seed=int(np.random.randint(0, 10000, size=1)[0])
         )
         return completion.choices[0].message.content
 
