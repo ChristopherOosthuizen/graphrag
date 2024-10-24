@@ -14,7 +14,7 @@ from graphrag.llm.types import (
     LLMInput,
     LLMOutput,
 )
-
+import pandas as pd 
 from ._prompts import JSON_CHECK_PROMPT
 from .openai_configuration import OpenAIConfiguration
 from .types import OpenAIClientTypes
@@ -51,7 +51,7 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
             {"role": "user", "content": input},
         ]
         completion = await self.client.chat.completions.create(
-            messages=messages, **args
+            messages=messages, **args, seed=np.random.randint(0, 10000, size=1)[0]
         )
         return completion.choices[0].message.content
 
